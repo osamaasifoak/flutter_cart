@@ -123,6 +123,7 @@ class FlutterCart {
   getCartItemCount() {
     return _cartItemList.length;
   }
+
   /// This method is used for getting the total amount.
   getTotalAmount() {
     double totalAmount = 0.0;
