@@ -1,14 +1,45 @@
-# owesome_cart
+# Flutter_Cart 🛒
 
-Flutter package for the cart management
+[![pub package](https://img.shields.io/pub/v/flutter_cart?label=flutter_cart&logo=Flutter%20Cart)]
+
+A flutter package for make your life easy. This package is use for maintaining a cart.
+
+
+
+## Usage #### (It is recommended to use any State Management. i.e:- Provider, Redux etc)
+
+To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+* first create an instance of flutter cart package.
+```
+     var cart = Cart();
+```
+* After getting the instance, we are able to get the built-in methods
+     * Add Items into cart
+        ```
+             cart.addToCart(
+                    {@required dynamic productId,
+                     @required dynamic unitPrice,
+                     @required int quantity,
+                     dynamic uniqueCheck,
+                     dynamic productDetailsObject}); 
+         ```
+     * Remove item one by one from cart ➖
+        ``` 
+            cart.decrementItemFromCart(index);
+        ```
+     * Add item one by one to cart ➕
+        ```
+            cart.incrementItemToCart(index);
+        ```
+     * Get the total amount
+        ``` 
+            cart.getTotalAmount()
+        ```
+     * Get the total quantity
+        ``` 
+            cart.getCartItemCount()
+        ```
+  

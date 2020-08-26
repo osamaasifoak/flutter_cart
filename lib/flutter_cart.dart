@@ -5,14 +5,19 @@ import 'package:flutter/material.dart';
 import 'model/cart_model.dart';
 
 class FlutterCart {
+  static final FlutterCart _instance = FlutterCart._internal();
   CartItem _cartItem;
-  // CartItemElement _cartItemElement;
   List<CartItem> _cartItemList;
   List<CartItem> get cartItem => _cartItemList;
   List<String> _uuid;
   bool _filterItemFound = false;
   var message;
-  FlutterCart() {
+
+  factory FlutterCart() {
+    return _instance;
+  }
+
+  FlutterCart._internal() {
     _cartItemList = new List<CartItem>();
     _uuid = List<String>();
   }
@@ -22,7 +27,15 @@ class FlutterCart {
       {@required dynamic productId,
       @required dynamic unitPrice,
       @required int quantity,
+
+      ///[uniqueCheck] is used to differentiate the type between item
+      ///[e.g] the shirt sizes in (LARGE, MEDIUM, SMALL) the [Product ID] will remain same
+      ///But if UUID is not present so, how we can differentiate between them? So in this case we will
+      ///User the uniqueCheck
       dynamic uniqueCheck,
+
+      ///[productDetailsObject] is used as a dump variable you can dump your object and any kind of data
+      ///that you wanted use in future.
       dynamic productDetailsObject}) {
     _cartItem = new CartItem();
     _setProductValues(
@@ -110,13 +123,14 @@ class FlutterCart {
   getCartItemCount() {
     return _cartItemList.length;
   }
-
+  /// This method is used for getting the total amount.
   getTotalAmount() {
     double totalAmount = 0.0;
     _cartItemList.forEach((e) => totalAmount += e.subTotal);
     return totalAmount;
   }
 
+  /// static messages
   static final String _successMessage = "Item added to cart successfully.";
   static final String _updateMessage = "Item updated successfully.";
   static final String _removedMessage = "Item removed from cart successfully.";
