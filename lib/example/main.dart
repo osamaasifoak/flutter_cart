@@ -1,6 +1,6 @@
 import 'package:flutter_cart/flutter_cart.dart';
 
-class CartProvider {
+class SampleClass {
   var message;
 
   /// Creating the instance of flutter cart package.
@@ -33,4 +33,9 @@ class CartProvider {
   addItemToCart(int index) {
     cart.incrementItemToCart(index);
   }
+}
+
+void main() {
+  var yourObject;
+  SampleClass().addItemToCart(yourObject);
 }
