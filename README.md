@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/flutter_cart?label=flutter_cart&logo=Flutter%20Cart)]
 
-A flutter package for make your life easy. This package is use for maintaining a cart.
+A flutter package for make your life easy. This package is used for maintaining a cart.
 
 ## Usage
 
