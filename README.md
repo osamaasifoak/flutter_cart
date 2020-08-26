@@ -6,7 +6,8 @@ A flutter package for make your life easy. This package is use for maintaining a
 
 
 
-## Usage #### (It is recommended to use any State Management. i.e:- Provider, Redux etc)
+## Usage 
+#### It is recommended to use any State Management. i.e:- Provider, Redux etc
 
 To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
