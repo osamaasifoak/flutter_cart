@@ -131,6 +131,29 @@ class FlutterCart {
     return totalAmount;
   }
 
+  //find specific item index in cart
+  int findItemIndexFromCart(currentProductId) {
+    for (int i = 0; i < _cartItemList.length; i++) {
+      if (_cartItemList[i].productId == currentProductId) {
+        return i;
+      }
+    }
+    return null;
+  }
+  
+  //delete specific product item from cart
+  deleteItemFromCart(int index) {
+    for (int i = _cartItemList[index].quantity; i > 0; i--) {
+      decrementItemFromCart(index);
+    }
+  }
+
+  //clear whole cart
+  deleteAllCart() {
+    _cartItemList = new List<CartItem>();
+    _uuid = List<String>();
+  }
+
   /// static messages
   static final String _successMessage = "Item added to cart successfully.";
   static final String _updateMessage = "Item updated successfully.";
