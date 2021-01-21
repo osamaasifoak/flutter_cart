@@ -9,3 +9,5 @@
 ## [0.0.5]
 
 - Product price floating issue fixed.
+
+## [0.0.5+1]
