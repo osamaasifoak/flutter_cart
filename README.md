@@ -15,7 +15,7 @@ To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml fil
 - first create an instance of flutter cart package.
 
 ```
-     var cart = Cart();
+     var cart = FlutterCart();
 ```
 
 - After getting the instance, we are able to get the built-in methods
