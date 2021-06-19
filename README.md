@@ -44,3 +44,10 @@ To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml fil
     ```
         cart.getCartItemCount()
     ```
+  - Get Specific Item from Cart
+    ```
+        cart.getSpecificItemFromCart(cartId)
+    ```
+
+
+
