@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Provider Demo',
+        title: 'flutter_cart',
         theme: appTheme,
         home: MyCatalog(),
         initialRoute: '/catalog',

@@ -4,6 +4,7 @@
 
 A flutter package for make your life easy. This package is used for maintaining a cart.
 
+![sample](flutter_cart(sample).gif)
 ## Usage
 
 #### It is recommended to use any State Management. i.e:- Provider, Redux etc
