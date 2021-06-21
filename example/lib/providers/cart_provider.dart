@@ -15,7 +15,7 @@ class CartProvider extends ChangeNotifier {
         productName: _productElement.name,
         quantity: funcQuantity == 0 ? 1 : funcQuantity,
         productDetailsObject: _productElement);
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool cartIsEmpty() {

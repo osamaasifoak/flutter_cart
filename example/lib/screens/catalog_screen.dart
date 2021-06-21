@@ -133,9 +133,21 @@ class _MyAppBar extends StatelessWidget {
       title: Text('Catalog', style: Theme.of(context).textTheme.headline1),
       floating: true,
       actions: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () => Navigator.pushNamed(context, '/cart'),
+        Stack(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () => Navigator.pushNamed(context, '/cart'),
+            ),
+            Consumer<CartProvider>(
+              builder: (context, consumer, child) {
+                return Positioned(
+                  right: 10,
+                  child: Text("${consumer.getCartItems().length}"),
+                );
+              },
+            )
+          ],
         ),
       ],
     );
