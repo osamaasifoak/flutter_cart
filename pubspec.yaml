@@ -1,11 +1,11 @@
 name: flutter_cart
 description: A flutter package for the cart management. This package helps you to perform basic cart operation like (Add to cart, Remove from cart, Get total count) etc.
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/osamaasifoak/flutter_cart
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=2.2.0"
+  flutter: ">=2.8.1"
 
 dependencies:
   flutter:
