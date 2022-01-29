@@ -55,20 +55,20 @@ To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml fil
 
 1. Make a dart file name offlinecart.dart and just copy-paste this code there.You may need some configuration to do that.
 
-    ```
-        class OfflineCart {
-
-SharedPreferences? preferance;
+```
+        
+class OfflineCart {
+  SharedPreferences? preferance;
   initSharePref() async {
-  preferance = await SharedPreferences.getInstance();
-}
+    preferance = await SharedPreferences.getInstance();
+  }
 
   var cart = FlutterCart();
   var carString = [];
-  makeOffline() async {await initSharePref();
+  makeOffline() async {
+    await initSharePref();
     carString = [];
     if (cart.cartItem.isEmpty) {
-     
       await preferance!.setString('offlineCart', ''); //
     } else {
       for (var i = 0; i < cart.cartItem.length; i++) {
@@ -81,9 +81,9 @@ SharedPreferences? preferance;
         };
         carString.add(obj);
       }
-     
-      await preferance!
-          .setString('offlineCart', jsonEncode(carString).toString()); // saving your cart
+
+      await preferance!.setString(
+          'offlineCart', jsonEncode(carString).toString()); // saving your cart
     }
   }
 
@@ -116,18 +116,19 @@ SharedPreferences? preferance;
   }
 }
 
-    ```
+
+```
 2. Boom we are ready to goooooo..
 -When you add a product to cart just use after your add to cart method
 ```
 OfflineCart().makeOffline();
 ```
--To get all the cart from your local use:
+3. To get all the cart from your local use:
 ```
 OfflineCart().getFromOffline();
 ```
 
--To Delete all the cart from your local use:
+4. To Delete all the cart from your local use:
 ```
 await preferance!.setString('offlineCart', '');
 ```
