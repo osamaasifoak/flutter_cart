@@ -20,7 +20,11 @@
 - ProductName variable has been added in Cart model.
 - Now you can get the specific product by using getSpecificItemFromCart(productId) named function.
 - Improved the package and fixed some minor issues.
-## [0.0.6]
+## [0.0.7]
+
+- Flutter cart updated to latest version
+
+## [0.0.8]
 
 - Flutter cart updated to latest version
 
