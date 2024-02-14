@@ -10,5 +10,4 @@ class CartResponseWrapper {
   // To make the sample app look nicer, each item is given one of the
   // Material Design primary colors.
   // : color = Colors.primaries[id % Colors.primaries.length];
-
 }
