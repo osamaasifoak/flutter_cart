@@ -6,7 +6,7 @@ import 'model/cart_model.dart';
 
 class FlutterCart {
   static final FlutterCart _instance = FlutterCart._internal();
-  late List<CartModel> cartItemsList;
+  late List<CartModel> _cartItemsList;
   late final SharedPreferences _sharedPreference;
 
   //OLD
@@ -21,7 +21,7 @@ class FlutterCart {
     _sharedPreference = await SharedPreferences.getInstance();
     await enableAndDisableCartPersistanceSupport(
         isPersistanceSupportEnabled: isPersistanceSupportEnabled);
-    cartItemsList = <CartModel>[];
+    _cartItemsList = <CartModel>[];
   }
 
   /// This method is called when we have to add [productTemp] into cart
@@ -31,39 +31,36 @@ class FlutterCart {
 
     if (existingItemIndex != -1) {
       var quantity =
-          cartItemsList[existingItemIndex].quantity + cartModel.quantity;
-      cartItemsList[existingItemIndex] =
-          cartItemsList[existingItemIndex].copyWith(quantity: quantity);
+          _cartItemsList[existingItemIndex].quantity + cartModel.quantity;
+      _cartItemsList[existingItemIndex] =
+          _cartItemsList[existingItemIndex].copyWith(quantity: quantity);
     } else {
-      cartItemsList.add(cartModel);
+      _cartItemsList.add(cartModel);
     }
     if (getPersistanceSupportStatus()) {
-      updatePersistanceCart(cartItemsList);
+      updatePersistanceCart(_cartItemsList);
     }
   }
 
   void updateQuantity(
       String productId, List<ProductVariant> variants, int newQuantity) {
-    var itemIndex = cartItemsList.indexWhere((item) =>
+    var itemIndex = _cartItemsList.indexWhere((item) =>
         item.productId == productId &&
         _areVariantsEqual(item.variants, variants));
 
     if (itemIndex != -1) {
-      cartItemsList[itemIndex] =
-          cartItemsList[itemIndex].copyWith(quantity: newQuantity);
+      _cartItemsList[itemIndex] =
+          _cartItemsList[itemIndex].copyWith(quantity: newQuantity);
     }
   }
 
   void removeItem(String productId, List<ProductVariant> variants) {
-    cartItemsList.removeWhere((item) =>
+    _cartItemsList.removeWhere((item) =>
         item.productId == productId &&
         _areVariantsEqual(item.variants, variants));
   }
 
   /// This method is called when we have to get the [cart lenght]
-  int getCartItemsCount() {
-    return cartItemsList.length;
-  }
 
   CartModel? getSpecificProduct(
     String productId,
@@ -71,7 +68,7 @@ class FlutterCart {
   ) {
     var itemIndex = getProductIndex(productId, variants);
     if (itemIndex != -1) {
-      return cartItemsList[itemIndex];
+      return _cartItemsList[itemIndex];
     }
     return null;
   }
@@ -80,7 +77,7 @@ class FlutterCart {
     String productId,
     List<ProductVariant> variants,
   ) {
-    var itemIndex = cartItemsList.indexWhere((item) =>
+    var itemIndex = _cartItemsList.indexWhere((item) =>
         item.productId == productId &&
         _areVariantsEqual(item.variants, variants));
 
@@ -92,13 +89,13 @@ class FlutterCart {
     var itemIndex = getProductIndex(productId, variants);
 
     if (itemIndex != -1) {
-      cartItemsList[itemIndex] =
-          cartItemsList[itemIndex].copyWith(discount: discount);
+      _cartItemsList[itemIndex] =
+          _cartItemsList[itemIndex].copyWith(discount: discount);
     }
   }
 
   void clearCart() {
-    cartItemsList.clear();
+    _cartItemsList.clear();
     unawaited(clearPersistanceCart());
   }
 
@@ -159,7 +156,7 @@ class FlutterCart {
 
   /// This method is called when we have to get the [Total amount]
   double get subtotal {
-    return cartItemsList.fold(0, (sum, item) {
+    return _cartItemsList.fold(0, (sum, item) {
       return sum +
           item.variants.fold(
             0,
@@ -174,7 +171,15 @@ class FlutterCart {
   }
 
   double get discount {
-    return cartItemsList.fold(
+    return _cartItemsList.fold(
         0, (sum, item) => sum + (item.discount * item.quantity));
+  }
+
+  int get cartLength {
+    return _cartItemsList.length;
+  }
+
+  List<CartModel> get cartItemsList {
+    return _cartItemsList;
   }
 }
