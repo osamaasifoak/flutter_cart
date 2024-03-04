@@ -22,10 +22,12 @@ CartModel _$CartModelFromJson(Map<String, dynamic> json) {
 mixin _$CartModel {
   String get productId => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
+  List<String>? get productImages => throw _privateConstructorUsedError;
   List<ProductVariant> get variants => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   double get discount => throw _privateConstructorUsedError;
   String get productDetails => throw _privateConstructorUsedError;
+  Map<String, Object>? get productMeta => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,10 +43,12 @@ abstract class $CartModelCopyWith<$Res> {
   $Res call(
       {String productId,
       String productName,
+      List<String>? productImages,
       List<ProductVariant> variants,
       int quantity,
       double discount,
-      String productDetails});
+      String productDetails,
+      Map<String, Object>? productMeta});
 }
 
 /// @nodoc
@@ -62,10 +66,12 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
   $Res call({
     Object? productId = null,
     Object? productName = null,
+    Object? productImages = freezed,
     Object? variants = null,
     Object? quantity = null,
     Object? discount = null,
     Object? productDetails = null,
+    Object? productMeta = freezed,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -76,6 +82,10 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
+      productImages: freezed == productImages
+          ? _value.productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       variants: null == variants
           ? _value.variants
           : variants // ignore: cast_nullable_to_non_nullable
@@ -92,6 +102,10 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
           ? _value.productDetails
           : productDetails // ignore: cast_nullable_to_non_nullable
               as String,
+      productMeta: freezed == productMeta
+          ? _value.productMeta
+          : productMeta // ignore: cast_nullable_to_non_nullable
+              as Map<String, Object>?,
     ) as $Val);
   }
 }
@@ -107,10 +121,12 @@ abstract class _$$CartModelImplCopyWith<$Res>
   $Res call(
       {String productId,
       String productName,
+      List<String>? productImages,
       List<ProductVariant> variants,
       int quantity,
       double discount,
-      String productDetails});
+      String productDetails,
+      Map<String, Object>? productMeta});
 }
 
 /// @nodoc
@@ -126,10 +142,12 @@ class __$$CartModelImplCopyWithImpl<$Res>
   $Res call({
     Object? productId = null,
     Object? productName = null,
+    Object? productImages = freezed,
     Object? variants = null,
     Object? quantity = null,
     Object? discount = null,
     Object? productDetails = null,
+    Object? productMeta = freezed,
   }) {
     return _then(_$CartModelImpl(
       productId: null == productId
@@ -140,6 +158,10 @@ class __$$CartModelImplCopyWithImpl<$Res>
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
+      productImages: freezed == productImages
+          ? _value._productImages
+          : productImages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       variants: null == variants
           ? _value._variants
           : variants // ignore: cast_nullable_to_non_nullable
@@ -156,6 +178,10 @@ class __$$CartModelImplCopyWithImpl<$Res>
           ? _value.productDetails
           : productDetails // ignore: cast_nullable_to_non_nullable
               as String,
+      productMeta: freezed == productMeta
+          ? _value._productMeta
+          : productMeta // ignore: cast_nullable_to_non_nullable
+              as Map<String, Object>?,
     ));
   }
 }
@@ -166,11 +192,15 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
   const _$CartModelImpl(
       {required this.productId,
       required this.productName,
+      final List<String>? productImages,
       required final List<ProductVariant> variants,
       this.quantity = 1,
       this.discount = 0.0,
-      required this.productDetails})
-      : _variants = variants;
+      required this.productDetails,
+      final Map<String, Object>? productMeta})
+      : _productImages = productImages,
+        _variants = variants,
+        _productMeta = productMeta;
 
   factory _$CartModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CartModelImplFromJson(json);
@@ -179,6 +209,16 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
   final String productId;
   @override
   final String productName;
+  final List<String>? _productImages;
+  @override
+  List<String>? get productImages {
+    final value = _productImages;
+    if (value == null) return null;
+    if (_productImages is EqualUnmodifiableListView) return _productImages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<ProductVariant> _variants;
   @override
   List<ProductVariant> get variants {
@@ -195,10 +235,19 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
   final double discount;
   @override
   final String productDetails;
+  final Map<String, Object>? _productMeta;
+  @override
+  Map<String, Object>? get productMeta {
+    final value = _productMeta;
+    if (value == null) return null;
+    if (_productMeta is EqualUnmodifiableMapView) return _productMeta;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CartModel(productId: $productId, productName: $productName, variants: $variants, quantity: $quantity, discount: $discount, productDetails: $productDetails)';
+    return 'CartModel(productId: $productId, productName: $productName, productImages: $productImages, variants: $variants, quantity: $quantity, discount: $discount, productDetails: $productDetails, productMeta: $productMeta)';
   }
 
   @override
@@ -208,10 +257,12 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
       ..add(DiagnosticsProperty('type', 'CartModel'))
       ..add(DiagnosticsProperty('productId', productId))
       ..add(DiagnosticsProperty('productName', productName))
+      ..add(DiagnosticsProperty('productImages', productImages))
       ..add(DiagnosticsProperty('variants', variants))
       ..add(DiagnosticsProperty('quantity', quantity))
       ..add(DiagnosticsProperty('discount', discount))
-      ..add(DiagnosticsProperty('productDetails', productDetails));
+      ..add(DiagnosticsProperty('productDetails', productDetails))
+      ..add(DiagnosticsProperty('productMeta', productMeta));
   }
 
   @override
@@ -223,13 +274,17 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
                 other.productId == productId) &&
             (identical(other.productName, productName) ||
                 other.productName == productName) &&
+            const DeepCollectionEquality()
+                .equals(other._productImages, _productImages) &&
             const DeepCollectionEquality().equals(other._variants, _variants) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             (identical(other.discount, discount) ||
                 other.discount == discount) &&
             (identical(other.productDetails, productDetails) ||
-                other.productDetails == productDetails));
+                other.productDetails == productDetails) &&
+            const DeepCollectionEquality()
+                .equals(other._productMeta, _productMeta));
   }
 
   @JsonKey(ignore: true)
@@ -238,10 +293,12 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
       runtimeType,
       productId,
       productName,
+      const DeepCollectionEquality().hash(_productImages),
       const DeepCollectionEquality().hash(_variants),
       quantity,
       discount,
-      productDetails);
+      productDetails,
+      const DeepCollectionEquality().hash(_productMeta));
 
   @JsonKey(ignore: true)
   @override
@@ -261,10 +318,12 @@ abstract class _CartModel implements CartModel {
   const factory _CartModel(
       {required final String productId,
       required final String productName,
+      final List<String>? productImages,
       required final List<ProductVariant> variants,
       final int quantity,
       final double discount,
-      required final String productDetails}) = _$CartModelImpl;
+      required final String productDetails,
+      final Map<String, Object>? productMeta}) = _$CartModelImpl;
 
   factory _CartModel.fromJson(Map<String, dynamic> json) =
       _$CartModelImpl.fromJson;
@@ -274,6 +333,8 @@ abstract class _CartModel implements CartModel {
   @override
   String get productName;
   @override
+  List<String>? get productImages;
+  @override
   List<ProductVariant> get variants;
   @override
   int get quantity;
@@ -281,6 +342,8 @@ abstract class _CartModel implements CartModel {
   double get discount;
   @override
   String get productDetails;
+  @override
+  Map<String, Object>? get productMeta;
   @override
   @JsonKey(ignore: true)
   _$$CartModelImplCopyWith<_$CartModelImpl> get copyWith =>
@@ -294,6 +357,7 @@ ProductVariant _$ProductVariantFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductVariant {
   String? get size => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -308,7 +372,7 @@ abstract class $ProductVariantCopyWith<$Res> {
           ProductVariant value, $Res Function(ProductVariant) then) =
       _$ProductVariantCopyWithImpl<$Res, ProductVariant>;
   @useResult
-  $Res call({String? size, double price});
+  $Res call({String? size, String? color, double price});
 }
 
 /// @nodoc
@@ -325,12 +389,17 @@ class _$ProductVariantCopyWithImpl<$Res, $Val extends ProductVariant>
   @override
   $Res call({
     Object? size = freezed,
+    Object? color = freezed,
     Object? price = null,
   }) {
     return _then(_value.copyWith(
       size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as String?,
       price: null == price
           ? _value.price
@@ -348,7 +417,7 @@ abstract class _$$ProductVariantImplCopyWith<$Res>
       __$$ProductVariantImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? size, double price});
+  $Res call({String? size, String? color, double price});
 }
 
 /// @nodoc
@@ -363,12 +432,17 @@ class __$$ProductVariantImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? size = freezed,
+    Object? color = freezed,
     Object? price = null,
   }) {
     return _then(_$ProductVariantImpl(
       size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as String?,
       price: null == price
           ? _value.price
@@ -383,7 +457,7 @@ class __$$ProductVariantImplCopyWithImpl<$Res>
 class _$ProductVariantImpl
     with DiagnosticableTreeMixin
     implements _ProductVariant {
-  _$ProductVariantImpl({this.size, required this.price});
+  _$ProductVariantImpl({this.size, this.color, required this.price});
 
   factory _$ProductVariantImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductVariantImplFromJson(json);
@@ -391,11 +465,13 @@ class _$ProductVariantImpl
   @override
   final String? size;
   @override
+  final String? color;
+  @override
   final double price;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProductVariant(size: $size, price: $price)';
+    return 'ProductVariant(size: $size, color: $color, price: $price)';
   }
 
   @override
@@ -404,6 +480,7 @@ class _$ProductVariantImpl
     properties
       ..add(DiagnosticsProperty('type', 'ProductVariant'))
       ..add(DiagnosticsProperty('size', size))
+      ..add(DiagnosticsProperty('color', color))
       ..add(DiagnosticsProperty('price', price));
   }
 
@@ -413,12 +490,13 @@ class _$ProductVariantImpl
         (other.runtimeType == runtimeType &&
             other is _$ProductVariantImpl &&
             (identical(other.size, size) || other.size == size) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, size, price);
+  int get hashCode => Object.hash(runtimeType, size, color, price);
 
   @JsonKey(ignore: true)
   @override
@@ -436,14 +514,18 @@ class _$ProductVariantImpl
 }
 
 abstract class _ProductVariant implements ProductVariant {
-  factory _ProductVariant({final String? size, required final double price}) =
-      _$ProductVariantImpl;
+  factory _ProductVariant(
+      {final String? size,
+      final String? color,
+      required final double price}) = _$ProductVariantImpl;
 
   factory _ProductVariant.fromJson(Map<String, dynamic> json) =
       _$ProductVariantImpl.fromJson;
 
   @override
   String? get size;
+  @override
+  String? get color;
   @override
   double get price;
   @override

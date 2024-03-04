@@ -4,7 +4,7 @@ version: 0.0.8
 homepage: https://github.com/osamaasifoak/flutter_cart
 
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: ">=3.2.6 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
