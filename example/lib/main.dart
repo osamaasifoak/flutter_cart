@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cart/flutter_cart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+var cart;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var cart = FlutterCart();
+  cart = FlutterCart();
   cart.initializeCart(isPersistanceSupportEnabled: true);
   runApp(const ProviderScope(child: MyApp()));
 }

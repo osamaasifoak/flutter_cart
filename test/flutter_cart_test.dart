@@ -1,5 +1,4 @@
 import 'package:flutter_cart/flutter_cart.dart';
-import 'package:flutter_cart/model/cart_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
