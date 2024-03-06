@@ -16,7 +16,7 @@ class CartModel with _$CartModel {
     @Default(1) int quantity,
     @Default(0.0) double discount,
     required String productDetails,
-    Map<String, Object>? productMeta,
+    Map<String, dynamic>? productMeta,
   }) = _CartModel;
 
   factory CartModel.fromJson(Map<String, Object?> json) =>

@@ -27,7 +27,7 @@ mixin _$CartModel {
   int get quantity => throw _privateConstructorUsedError;
   double get discount => throw _privateConstructorUsedError;
   String get productDetails => throw _privateConstructorUsedError;
-  Map<String, Object>? get productMeta => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get productMeta => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +48,7 @@ abstract class $CartModelCopyWith<$Res> {
       int quantity,
       double discount,
       String productDetails,
-      Map<String, Object>? productMeta});
+      Map<String, dynamic>? productMeta});
 }
 
 /// @nodoc
@@ -105,7 +105,7 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
       productMeta: freezed == productMeta
           ? _value.productMeta
           : productMeta // ignore: cast_nullable_to_non_nullable
-              as Map<String, Object>?,
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -126,7 +126,7 @@ abstract class _$$CartModelImplCopyWith<$Res>
       int quantity,
       double discount,
       String productDetails,
-      Map<String, Object>? productMeta});
+      Map<String, dynamic>? productMeta});
 }
 
 /// @nodoc
@@ -181,7 +181,7 @@ class __$$CartModelImplCopyWithImpl<$Res>
       productMeta: freezed == productMeta
           ? _value._productMeta
           : productMeta // ignore: cast_nullable_to_non_nullable
-              as Map<String, Object>?,
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -197,7 +197,7 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
       this.quantity = 1,
       this.discount = 0.0,
       required this.productDetails,
-      final Map<String, Object>? productMeta})
+      final Map<String, dynamic>? productMeta})
       : _productImages = productImages,
         _variants = variants,
         _productMeta = productMeta;
@@ -235,9 +235,9 @@ class _$CartModelImpl with DiagnosticableTreeMixin implements _CartModel {
   final double discount;
   @override
   final String productDetails;
-  final Map<String, Object>? _productMeta;
+  final Map<String, dynamic>? _productMeta;
   @override
-  Map<String, Object>? get productMeta {
+  Map<String, dynamic>? get productMeta {
     final value = _productMeta;
     if (value == null) return null;
     if (_productMeta is EqualUnmodifiableMapView) return _productMeta;
@@ -323,7 +323,7 @@ abstract class _CartModel implements CartModel {
       final int quantity,
       final double discount,
       required final String productDetails,
-      final Map<String, Object>? productMeta}) = _$CartModelImpl;
+      final Map<String, dynamic>? productMeta}) = _$CartModelImpl;
 
   factory _CartModel.fromJson(Map<String, dynamic> json) =
       _$CartModelImpl.fromJson;
@@ -343,7 +343,7 @@ abstract class _CartModel implements CartModel {
   @override
   String get productDetails;
   @override
-  Map<String, Object>? get productMeta;
+  Map<String, dynamic>? get productMeta;
   @override
   @JsonKey(ignore: true)
   _$$CartModelImplCopyWith<_$CartModelImpl> get copyWith =>

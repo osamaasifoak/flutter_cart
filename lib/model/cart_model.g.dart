@@ -19,9 +19,7 @@ _$CartModelImpl _$$CartModelImplFromJson(Map<String, dynamic> json) =>
       quantity: json['quantity'] as int? ?? 1,
       discount: (json['discount'] as num?)?.toDouble() ?? 0.0,
       productDetails: json['productDetails'] as String,
-      productMeta: (json['productMeta'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as Object),
-      ),
+      productMeta: json['productMeta'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$CartModelImplToJson(_$CartModelImpl instance) =>

@@ -67,12 +67,12 @@ class ShoppingCartIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var cartCount = ref.watch(cartNotifierProvider).getCartCount;
+    var cart = ref.watch(cartNotifierProvider);
     return InkWell(
       onTap: () => context.push('/cart'),
       child: Badge(
         backgroundColor: Colors.purpleAccent,
-        label: Text(cartCount.toString()),
+        label: Text(cart.getCartCount.toString()),
         child: const Icon(
           Icons.shopping_cart,
           color: Colors.white,

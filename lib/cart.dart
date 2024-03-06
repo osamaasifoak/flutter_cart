@@ -9,7 +9,6 @@ class FlutterCart {
   late List<CartModel> _cartItemsList;
   late final SharedPreferences _sharedPreference;
 
-  //OLD
   factory FlutterCart() {
     return _instance;
   }
@@ -18,10 +17,13 @@ class FlutterCart {
   /// Set [isPersistanceSupportEnabled] to true to turn on the cart persistance
   Future<void> initializeCart(
       {bool isPersistanceSupportEnabled = false}) async {
+    _cartItemsList = <CartModel>[];
     _sharedPreference = await SharedPreferences.getInstance();
     await enableAndDisableCartPersistanceSupport(
         isPersistanceSupportEnabled: isPersistanceSupportEnabled);
-    _cartItemsList = <CartModel>[];
+    if (isPersistanceSupportEnabled) {
+      _cartItemsList = getPersistanceCartItems() ?? [];
+    }
   }
 
   /// This method is called when we have to add [productTemp] into cart
@@ -44,13 +46,20 @@ class FlutterCart {
 
   void updateQuantity(
       String productId, List<ProductVariant> variants, int newQuantity) {
-    var itemIndex = _cartItemsList.indexWhere((item) =>
-        item.productId == productId &&
-        _areVariantsEqual(item.variants, variants));
+    if (newQuantity == 0) {
+      removeItem(productId, variants);
+    } else {
+      var itemIndex = _cartItemsList.indexWhere((item) =>
+          item.productId == productId &&
+          _areVariantsEqual(item.variants, variants));
 
-    if (itemIndex != -1) {
-      _cartItemsList[itemIndex] =
-          _cartItemsList[itemIndex].copyWith(quantity: newQuantity);
+      if (itemIndex != -1) {
+        _cartItemsList[itemIndex] =
+            _cartItemsList[itemIndex].copyWith(quantity: newQuantity);
+        if (getPersistanceSupportStatus()) {
+          updatePersistanceCart(_cartItemsList);
+        }
+      }
     }
   }
 
@@ -58,9 +67,12 @@ class FlutterCart {
     _cartItemsList.removeWhere((item) =>
         item.productId == productId &&
         _areVariantsEqual(item.variants, variants));
+    if (getPersistanceSupportStatus()) {
+      updatePersistanceCart(_cartItemsList);
+    }
   }
 
-  /// This method is called when we have to get the [cart lenght]
+  /// This method is called when we have to get the [cart length]
 
   CartModel? getSpecificProduct(
     String productId,

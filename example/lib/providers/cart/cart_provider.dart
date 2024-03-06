@@ -11,6 +11,7 @@ class CartNotifier extends ChangeNotifier {
   var flutterCart = FlutterCart();
 
   void addToCart(ProductItemsModel product) {
+    var discount = (product.discountPercentage / 100) * product.price;
     flutterCart.addToCart(
       cartModel: CartModel(
           productId: product.id.toString(),
@@ -19,11 +20,19 @@ class CartNotifier extends ChangeNotifier {
             ProductVariant(price: product.price),
           ],
           productDetails: product.description,
-          discount: product.discountPercentage),
+          discount: discount,
+          productMeta: product.toJson()),
     );
+    notifyListeners();
+  }
+
+  void updateQuantity(CartModel item, int newQuantity) {
+    flutterCart.updateQuantity(
+        item.productId.toString(), item.variants, newQuantity);
     notifyListeners();
   }
 
   int get getCartCount => flutterCart.cartLength;
   List<CartModel> get getCartItems => flutterCart.cartItemsList;
+  double get getTotalAmount => flutterCart.total;
 }
