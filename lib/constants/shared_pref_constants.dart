@@ -1,4 +1,4 @@
 class SharedPreferenceConstants {
-  static final isPersistanceSupportEnabled = 'isOfflineSupportEnabled';
+  static final isPersistenceSupportEnabled = 'isOfflineSupportEnabled';
   static final persistCart = 'persistCart';
 }
