@@ -32,7 +32,18 @@ class CartNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeItemFromCart(CartModel item) {
+    flutterCart.removeItem(item.productId.toString(), item.variants);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    flutterCart.clearCart();
+    notifyListeners();
+  }
+
   int get getCartCount => flutterCart.cartLength;
   List<CartModel> get getCartItems => flutterCart.cartItemsList;
   double get getTotalAmount => flutterCart.total;
+  double get subtotal => flutterCart.subtotal;
 }

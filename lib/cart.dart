@@ -15,18 +15,38 @@ class FlutterCart {
   FlutterCart._internal();
 
   /// Set [isPersistanceSupportEnabled] to true to turn on the cart persistance
+  /// Example:
+  /// void main() async {
+  ///   WidgetsFlutterBinding.ensureInitialized();
+  ///   var cart = FlutterCart();
+  ///   await cart.initializeCart(isPersistanceSupportEnabled: true);
+  ///   runApp(MyApp());
+  /// }
   Future<void> initializeCart(
       {bool isPersistanceSupportEnabled = false}) async {
     _cartItemsList = <CartModel>[];
     _sharedPreference = await SharedPreferences.getInstance();
-    await enableAndDisableCartPersistanceSupport(
+    await _enableAndDisableCartPersistanceSupport(
         isPersistanceSupportEnabled: isPersistanceSupportEnabled);
     if (isPersistanceSupportEnabled) {
-      _cartItemsList = getPersistanceCartItems() ?? [];
+      _cartItemsList = _getPersistanceCartItems() ?? [];
     }
   }
 
-  /// This method is called when we have to add [productTemp] into cart
+  /// This method is called when we have to add item into the cart
+  /// Example:
+  ///   void addToCart(YourProductModel product) {
+  ///   flutterCart.addToCart(
+  ///     cartModel: CartModel(
+  ///       // ... other parameters       
+  ///       if [discount] is applicable and in percentage so, you can 
+  ///       calculate the discount like this
+  ///       var discount = (product.discountPercentage / 100) * product.price;
+  ///       discount: discount,
+  ///       [productMeta] takes Map<String, dynamic> so, you can store your complete product data in productMeta
+  ///       productMeta: product.toJson()), 
+  ///   );
+  /// }
   void addToCart({required CartModel cartModel}) {
     var existingItemIndex =
         getProductIndex(cartModel.productId, cartModel.variants);
@@ -40,9 +60,15 @@ class FlutterCart {
       _cartItemsList.add(cartModel);
     }
     if (getPersistanceSupportStatus()) {
-      updatePersistanceCart(_cartItemsList);
+      _updatePersistanceCart(_cartItemsList);
     }
   }
+  /// [updateQuantity] is used to increment/decrement the item quantity
+  /// Example:
+  ///  void updateQuantity(CartModel item, int newQuantity) {
+  ///     flutterCart.updateQuantity(
+  ///     item.productId, item.variants, newQuantity);
+  /// }
 
   void updateQuantity(
       String productId, List<ProductVariant> variants, int newQuantity) {
@@ -57,23 +83,26 @@ class FlutterCart {
         _cartItemsList[itemIndex] =
             _cartItemsList[itemIndex].copyWith(quantity: newQuantity);
         if (getPersistanceSupportStatus()) {
-          updatePersistanceCart(_cartItemsList);
+          _updatePersistanceCart(_cartItemsList);
         }
       }
     }
   }
-
+  /// [removeItem] is used for removing the specific item from cart
+  /// Example:
+  /// void removeItemFromCart(CartModel item) {
+  //    flutterCart.removeItem(item.productId, item.variants);
+  //  }
   void removeItem(String productId, List<ProductVariant> variants) {
     _cartItemsList.removeWhere((item) =>
         item.productId == productId &&
         _areVariantsEqual(item.variants, variants));
     if (getPersistanceSupportStatus()) {
-      updatePersistanceCart(_cartItemsList);
+      _updatePersistanceCart(_cartItemsList);
     }
   }
 
-  /// This method is called when we have to get the [cart length]
-
+  /// [getSpecificProduct] will return the specific item from cart
   CartModel? getSpecificProduct(
     String productId,
     List<ProductVariant> variants,
@@ -85,6 +114,7 @@ class FlutterCart {
     return null;
   }
 
+  /// [getProductIndex] will return the specific item index
   int getProductIndex(
     String productId,
     List<ProductVariant> variants,
@@ -96,6 +126,9 @@ class FlutterCart {
     return itemIndex;
   }
 
+  /// [applyDiscount] use this method when you have case where you have to apply discount 
+  /// on specific product. Otherwise you can also apply discount the time of adding product into the cart.
+  /// Check [addToCart] example for more info. 
   void applyDiscount(
       String productId, List<ProductVariant> variants, double discount) {
     var itemIndex = getProductIndex(productId, variants);
@@ -106,36 +139,44 @@ class FlutterCart {
     }
   }
 
+  /// [clearCart] will clear the complete cart, including both in-memory and persistent cart data.
   void clearCart() {
     _cartItemsList.clear();
-    unawaited(clearPersistanceCart());
+    unawaited(_clearPersistanceCart());
   }
 
-  //By default the persistance support will be off
-  Future<void> enableAndDisableCartPersistanceSupport(
-      {required bool isPersistanceSupportEnabled}) async {
-    await _sharedPreference.setBool(
-      SharedPreferenceConstants.isPersistanceSupportEnabled,
-      isPersistanceSupportEnabled,
-    );
-    if (!isPersistanceSupportEnabled) {
-      await clearPersistanceCart();
-    }
-  }
-
+  /// [getPersistanceSupportStatus] use this method to check the persistance storage enable/disable status
   bool getPersistanceSupportStatus() {
     var status = _sharedPreference
         .getBool(SharedPreferenceConstants.isPersistanceSupportEnabled);
     return status ?? false;
   }
 
-  void updatePersistanceCart(List<CartModel> cartItemsList) {
+  //By default the persistance support will be off
+  Future<void> _enableAndDisableCartPersistanceSupport(
+      {required bool isPersistanceSupportEnabled}) async {
+    try {
+      await _sharedPreference.setBool(
+        SharedPreferenceConstants.isPersistanceSupportEnabled,
+        isPersistanceSupportEnabled,
+      );
+      if (!isPersistanceSupportEnabled) {
+        await _clearPersistanceCart();
+      }
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+
+
+  void _updatePersistanceCart(List<CartModel> cartItemsList) {
     var cartList = cartItemsList.map((e) => json.encode(e.toJson())).toList();
     unawaited(_sharedPreference.setStringList(
         SharedPreferenceConstants.persistCart, cartList));
   }
 
-  List<CartModel>? getPersistanceCartItems() {
+  List<CartModel>? _getPersistanceCartItems() {
     var items =
         _sharedPreference.getStringList(SharedPreferenceConstants.persistCart);
     if (items != null && items.isNotEmpty) {
@@ -144,12 +185,13 @@ class FlutterCart {
     return null;
   }
 
-  Future<bool> clearPersistanceCart() async {
+  Future<bool> _clearPersistanceCart() async {
     var isRemoved =
         await _sharedPreference.remove(SharedPreferenceConstants.persistCart);
     return isRemoved;
   }
 
+  /// Compares two lists of ProductVariant objects for equality.
   bool _areVariantsEqual(
       List<ProductVariant> variants1, List<ProductVariant> variants2) {
     if (variants1.length != variants2.length) {
@@ -193,5 +235,8 @@ class FlutterCart {
 
   List<CartModel> get cartItemsList {
     return _cartItemsList;
+  }
+  List<CartModel>? get persistanceCartItemsList {
+    return _getPersistanceCartItems();
   }
 }

@@ -34,7 +34,7 @@ void main() {
     expect(cart.cartItemsList.length, 2);
     expect(cart.cartItemsList[0].quantity, 2);
     expect(cart.cartItemsList[1].quantity, 4);
-    var persistItem = cart.getPersistanceCartItems();
+    var persistItem = cart.persistanceCartItemsList;
     expect(persistItem, null);
   });
 
@@ -62,7 +62,7 @@ void main() {
 
     // Assert
     expect(cart.cartItemsList.length, 2);
-    expect(cart.getPersistanceCartItems()?.length, 2);
+    expect(cart.persistanceCartItemsList?.length, 2);
   });
 
   test('addToCart should update quantity for existing items', () async {
