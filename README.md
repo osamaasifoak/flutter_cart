@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   flutter_cart:
 ```
+#### Note:
+This package is using [`shared_preferences`](https://pub.dev/packages/shared_preferences) for persisting cart items.
 
 ## Getting Started
 
