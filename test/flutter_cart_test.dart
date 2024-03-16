@@ -34,14 +34,14 @@ void main() {
     expect(cart.cartItemsList.length, 2);
     expect(cart.cartItemsList[0].quantity, 2);
     expect(cart.cartItemsList[1].quantity, 4);
-    var persistItem = cart.persistanceCartItemsList;
+    var persistItem = cart.persistenceCartItemsList;
     expect(persistItem, null);
   });
 
   test('addToCart should add items to the cart with persistance', () async {
     // Arrange
     final cart = FlutterCart();
-    await cart.initializeCart(isPersistanceSupportEnabled: true);
+    await cart.initializeCart(isPersistenceSupportEnabled: true);
 
     final cartModel1 = CartModel(
         productId: '1',
@@ -62,7 +62,7 @@ void main() {
 
     // Assert
     expect(cart.cartItemsList.length, 2);
-    expect(cart.persistanceCartItemsList?.length, 2);
+    expect(cart.persistenceCartItemsList?.length, 2);
   });
 
   test('addToCart should update quantity for existing items', () async {

@@ -1,4 +1,5 @@
-# Flutter_Cart 🛒
+
+![logo](logo.png)
 
 ![pub package](https://img.shields.io/pub/v/flutter_cart?label=flutter_cart&logo=Flutter%20Cart)
 
@@ -7,6 +8,7 @@ Empower your Flutter app with seamless cart management using this powerful packa
 ![sample](<flutter_cart(sample).gif>)
 
 ## Features
+
 - Initialization: Initialize the flutter_cart using initializeCart() method. Pass isPersistenceSupportEnabled to true to enable persistence support.
 - Add to Cart: Add products to the cart with the addToCart method.
 - Update Quantity: Update the quantity of the items e.g. increment/decrement using the updateQuantity method.
@@ -20,11 +22,11 @@ Empower your Flutter app with seamless cart management using this powerful packa
 - Get Specific Item: Use getSpecificProduct method to get the specific item from the cart.
 - Check Persistence Support: Use getPersistenceSupportStatus method to check the persistence support status.
 
-
 ## Usage
 
 To use this plugin, add `flutter_cart` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-``` 
+
+```
 dependencies:
   flutter:
     sdk: flutter
@@ -33,72 +35,73 @@ dependencies:
 
 ## Getting Started
 
-- ### Initialization 
-     first, create an instance of flutter_cart package.
+- ### Initialization
 
-    ```
-     // Set [isPersistenceSupportEnabled] to true to turn on the cart persistence
-       void main() async {
-         WidgetsFlutterBinding.ensureInitialized();
-         var cart = FlutterCart();
-         await cart.initializeCart(isPersistenceSupportEnabled: true);
-         runApp(MyApp());
-       }
-    ```
+  first, create an instance of flutter_cart package.
+
+  ```
+   // Set [isPersistenceSupportEnabled] to true to turn on the cart persistence
+     void main() async {
+       WidgetsFlutterBinding.ensureInitialized();
+       var cart = FlutterCart();
+       await cart.initializeCart(isPersistenceSupportEnabled: true);
+       runApp(MyApp());
+     }
+  ```
 
 - ### Add to cart 🛒
-    ```
-         // This method is called when we have to add an item to the cart
-         // Example:
-         void addToCart(YourProductModel product) {
-         flutterCart.addToCart(
-           cartModel: CartModel(
-             // ... other parameters
-             if [discount] is applicable and in percentage so, you can
-             calculate the discount like this
-             var discount = (product.discountPercentage / 100) * product.price;
-             discount: discount,
-             [productMeta] takes Map<String, dynamic> so, you can store your complete product data in productMeta
-             productMeta: product.toJson()),
-           );
-         }
-    ```
+  ```
+       // This method is called when we have to add an item to the cart
+       // Example:
+       void addToCart(YourProductModel product) {
+       flutterCart.addToCart(
+         cartModel: CartModel(
+           // ... other parameters
+           if [discount] is applicable and in percentage so, you can
+           calculate the discount like this
+           var discount = (product.discountPercentage / 100) * product.price;
+           discount: discount,
+           [productMeta] takes Map<String, dynamic> so, you can store your complete product data in productMeta
+           productMeta: product.toJson()),
+         );
+       }
+  ```
 - ### Update quantity ➕/ ➖
-    ```
-        // [updateQuantity] is used to increment/decrement the item quantity
-        // Example:
-        void updateQuantity(CartModel item, int newQuantity) {
-           flutterCart.updateQuantity(
-           item.productId, item.variants, newQuantity);
-        }
-    ```
+  ```
+      // [updateQuantity] is used to increment/decrement the item quantity
+      // Example:
+      void updateQuantity(CartModel item, int newQuantity) {
+         flutterCart.updateQuantity(
+         item.productId, item.variants, newQuantity);
+      }
+  ```
 - ### Remove item 🗑️
-    ```
-        // [removeItem] is used for removing the specific item from the cart
-        // Example:
-        void removeItemFromCart(CartModel item) {
-          flutterCart.removeItem(item.productId, item.variants);
-        }
-    ```
+  ```
+      // [removeItem] is used for removing the specific item from the cart
+      // Example:
+      void removeItemFromCart(CartModel item) {
+        flutterCart.removeItem(item.productId, item.variants);
+      }
+  ```
 - ### Clear cart 🧹
-    ```
-         void clearCart() {
-            flutterCart.clearCart();
-         }
-    ```
-- ### Get cart Items    
-    ```
-        List<CartModel> get getCartItems => flutterCart.cartItemsList;
-    ```
+  ```
+       void clearCart() {
+          flutterCart.clearCart();
+       }
+  ```
+- ### Get cart Items
+  ```
+      List<CartModel> get getCartItems => flutterCart.cartItemsList;
+  ```
 - ### Total quantity
-    ```
-        int get getCartCount => flutterCart.cartLength;
-    ```
+  ```
+      int get getCartCount => flutterCart.cartLength;
+  ```
 - ### Total amount
-    ```
-        double get getTotalAmount => flutterCart.total;
-    ```
+  ```
+      double get getTotalAmount => flutterCart.total;
+  ```
 - ### Subtotal
-    ```
-        double get subtotal => flutterCart.subtotal;
-    ```    
+  ```
+      double get subtotal => flutterCart.subtotal;
+  ```
