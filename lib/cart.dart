@@ -33,7 +33,7 @@ class FlutterCart {
     }
   }
 
-  /// This method is called when we have to add item into the cart
+  /// This method is called when we have to add an item to the cart
   /// Example:
   ///   void addToCart(YourProductModel product) {
   ///   flutterCart.addToCart(
@@ -90,7 +90,7 @@ class FlutterCart {
     }
   }
 
-  /// [removeItem] is used for removing the specific item from cart
+  /// [removeItem] is used for removing the specific item from the cart
   /// Example:
   /// void removeItemFromCart(CartModel item) {
   //    flutterCart.removeItem(item.productId, item.variants);
