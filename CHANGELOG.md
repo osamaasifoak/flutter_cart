@@ -28,3 +28,9 @@
 
 - Flutter cart updated to latest version
 
+## [0.0.9]
+
+- Flutter cart updated to latest version
+- Improved documentation
+- Persistence support added
+
