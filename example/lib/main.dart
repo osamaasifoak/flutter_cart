@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var cart = FlutterCart();
-  await cart.initializeCart(isPersistanceSupportEnabled: true);
+  await cart.initializeCart(isPersistenceSupportEnabled: true);
   runApp(const ProviderScope(child: MyApp()));
 }
 
